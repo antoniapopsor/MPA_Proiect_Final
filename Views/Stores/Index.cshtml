@@ -1,0 +1,84 @@
+﻿@model SmartphoneShop.Models.ShopViewModels.StoreIndexData
+@{
+    ViewData["Title"] = "Stores";
+}
+<h2>Stores</h2>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Store Name</th>
+            <th>Adress</th>
+            <th>Smartphones</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Stores)
+        {
+            string selectedRow = "";
+            if (item.ID == (int?)ViewData["StoreID"])
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.DisplayFor(modelItem => item.StoreName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Adress)
+                </td>
+
+                <td>
+                    @{
+                        foreach (var smartphone in item.StoreSmartphones)
+                        {
+                            @smartphone.Smartphone.ID @: @smartphone.Smartphone.Model <br />
+                        }
+                    }
+                </td>
+                <td>
+                    <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@*@if (Model.Smartphones != null)
+{
+    <h3>Smartphones selled by the following stores</h3>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Model</th>
+            <th>Manufacturer</th>
+            <th>Price</th>
+        </tr>
+        @foreach (var item in Model.Smartphones)
+        {
+            string selectedRow = "";
+            if (item.ID == (int?)ViewData["smartphoneID"])
+
+                selectedRow = "success";
+        }
+        <tr class="@selectedRow">
+            <td>
+                @Html.ActionLink("Select", "Index", new { smartphoneID = item.ID })
+            </td>
+            <td>
+                @item.Model
+            </td>
+            <td>
+                @item.Manufacturer
+            </td>
+            <td>
+                @item.Price
+            </td>
+        </tr>
+        }
+*@
