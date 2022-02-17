@@ -40,6 +40,10 @@ namespace SmartphoneShop.Controllers
                 {
                     _logger = logger;
                 }*/
+        public IActionResult Chat()
+        {
+            return View();
+        }
 
         public IActionResult Index()
         {

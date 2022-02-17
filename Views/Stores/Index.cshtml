@@ -1,7 +1,9 @@
-﻿@model SmartphoneShop.Models.ShopViewModels.StoreIndexData
+﻿@*@model SmartphoneShop.Models.ShopViewModels.StoreIndexData
+
 @{
     ViewData["Title"] = "Stores";
 }
+
 <h2>Stores</h2>
 <p>
     <a asp-action="Create">Create New</a>
@@ -49,7 +51,8 @@
         }
     </tbody>
 </table>
-@*@if (Model.Smartphones != null)
+
+    @if (Model.Smartphones != null)
 {
     <h3>Smartphones selled by the following stores</h3>
     <table class="table">
@@ -59,10 +62,11 @@
             <th>Manufacturer</th>
             <th>Price</th>
         </tr>
+
         @foreach (var item in Model.Smartphones)
         {
             string selectedRow = "";
-            if (item.ID == (int?)ViewData["smartphoneID"])
+            if (item.ID == (int?)ViewData["SmartphoneID"])
 
                 selectedRow = "success";
         }
@@ -81,4 +85,26 @@
             </td>
         </tr>
         }
-*@
+        @if (Model.Orders != null)
+        {
+            <h3>
+                Customers that have ordered the Selected Book
+            </h3>
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Order Date</th>
+                </tr>
+                @foreach (var item in Model.Orders)
+                {
+                    <tr>
+                        <td>
+                            @item.Customer.Name
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderDate)
+                        </td>
+                    </tr>
+                }
+            </table>
+        }*@
